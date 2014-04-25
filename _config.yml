@@ -6,23 +6,23 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            Poole
-tagline:          The Jekyll Butler
-description:      Base theme for Jekyll themes by @mdo.
+title:            Waqas Ahmed
+tagline:          My opinions and inspirations
+description:      Trying to get my head around it.
 url:              http://getpoole.com
 
 author:
-  name:           Mark Otto
-  url:            https://twitter.com/mdo
+  name:           Waqas Ahmed
+  url:            https://twitter.com/waqas716
 
 paginate:         1
 
 # Custom vars
 version:          1.0.0
 
-github:
-  repo:           https://github.com/poole/poole
-  
+# github:
+#   repo:           https://github.com/poole/poole
+
 pages_list:       
   About: '/about'
   Archive: '/archive'
