@@ -6,7 +6,7 @@ permalink: 5-Transformational-Learnings
 #####Lessons learned while taking a break from day to day routine and getting out of comfort zone.
 
 
-Last weekend we had an official trip to Khan Pur Lake, and on this trip there were some activities organized by 0Billion (a tour organizing company). Those activities were meant to be life-changing experience and yes those were truly amazing and were a life-changing experience. It was almost 2 days trip that included caving, shooting, raft building, cliff jumping, repelling, jet skiing and other team activities.
+Last weekend we had an official trip to <a href="https://www.google.com.pk/search?q=khan+pur+lake&rlz=1C5CHFA_enPK561PK561&es_sm=91&tbm=isch&tbo=u&source=univ&sa=X&ei=obVpU529C4iWPbLggOgH&ved=0CEAQsAQ&biw=1278&bih=649#q=khanpur+lake&spell=1&tbm=isch" target="_blank">Khanpur Lake</a>, and on this trip there were some activities organized by <a href="http://www.emac.pk" target="_blacnk">EMAC </a> (a tour organizing company). Those activities were meant to be life-changing experience and yes those were truly amazing and were a life-changing experience. It was almost 2 days trip that included caving, shooting, raft building, cliff jumping, repelling, jet skiing and other team activities.
 
 There are two types of people in my company now, those who were present on trip and those who weren’t. The trust and relationship strength between those who were present on trip will never ever be the same with other ones. And other ones are totally gonna miss the bond which we will have for forever now.
 
