@@ -20,9 +20,9 @@ Be vulnerable; showing your fears won’t make you less of a man. Others can rel
 
 ###### Be Open. 
 Be open to change, learn new skills and experiences. All these will take you one step further as an individual and you will feel amazing once you get out of your comfort zone. As Steve Jobs puts it very delicately,
-~~~
+```
 Stay Hungry, Stay Foolish.
-~~~
+```
 
 ###### People Are Awesome.
 Everyone is unique with his or her own unique strengths and weaknesses. In normal routine, we judge other people too quickly by their weaknesses. That’s what we must not do. Because once we have judged, we will never be able to see the phenomenal part of his or her personality. And believe me, Everyone has one. We should highlight their strengths and help them to cover up their weaknesses in a way that they will progress and achieve their vision.
