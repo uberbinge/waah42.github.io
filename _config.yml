@@ -1,29 +1,32 @@
 # Dependencies
-kramdown:         redcarpet
-pygments:         true
+markdown:	kramdown
+highlighter:	pygment
 
 # Permalinks
-permalink:        pretty
+permalink:	pretty
 
 # Setup
-title:            Waqas Ahmed
-tagline:          My opinions and inspirations
-description:      Trying to get my head around it.
-url:              http://getpoole.com
+title:	Waqas Ahmed
+tagline:	My opinions and inspirations
+description:	Trying to get my head around it.
+url:	http://getpoole.com
 
 author:
-  name:           Waqas Ahmed
-  url:            https://twitter.com/waqas716
+  name:	Waqas Ahmed
+  url:	https://twitter.com/waqas716
 
-paginate:         1
+paginate:	1
 
 # Custom vars
-version:          1.0.0
+version:	1.0.0
 
 # github:
 #   repo:           https://github.com/poole/poole
 
 pages_list:       
-  About: '/about'
-  Archive: '/archive'
-  Feed: '/atom.xml'
+  About:	'/about'
+  Archive:	'/archive'
+  Feed:	'/atom.xml'
+
+# gems
+gems: [jekyll-paginate]
