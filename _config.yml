@@ -1,6 +1,5 @@
 # Dependencies
-markdown:	kramdown
-highlighter:	pygment
+highlighter:	rouge
 
 # Permalinks
 permalink:	pretty
@@ -10,6 +9,7 @@ title:	Waqas Ahmed
 tagline:	My opinions and inspirations
 description:	Trying to get my head around it.
 url:	http://getpoole.com
+markdown:	kramdown
 
 author:
   name:	Waqas Ahmed
