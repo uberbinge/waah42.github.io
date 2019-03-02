@@ -1,12 +1,8 @@
 ---
 layout: post
-title: pair programming vs peer reviews?
+title: When to prefer pair programming over peer reviews?
 permalink: pair-programming-vs-peer-reviews
 ---
-
-![Photo by [Fabian Grohs](https://unsplash.com/@grohsfabian) on [Unsplash](https://unsplash.com)](https://cdn-images-1.medium.com/max/1600/0*qe3nBlp3ywhdlxFg.)*Photo by [Fabian Grohs](https://unsplash.com/@grohsfabian) on [Unsplash](https://unsplash.com)*
-
-# When to prefer pair programming over peer reviews?
 
 When to prefer pair programming over peer reviews?
 
