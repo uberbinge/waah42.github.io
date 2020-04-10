@@ -19,7 +19,7 @@ I started building the APK locally through this because waiting on Bitrise for h
 
 Now let’s continue from the reverse order this time, let’s find which commit is responsible for the issue. After going through multiple commits I found out that *one* commit which was causing the APK size to bump, it had some android libraries updates like constraint-layout and material-design but also Android-Gradle-Plugin version to [3.6.1](https://developer.android.com/studio/releases/gradle-plugin#3-6-0).
 
- The only pointer I was following while building locally was to see where the increase in size happens, and it was that innocent commit with two android libraries and Gradle-Plugin update. Ok now YES! we have the commit let's check which of the updates are causing the size to spike, I thought must be the libs update to newer versions so let's check the Gradle-Plugin update first and be done with it that this not the problem, but surprise! After the only plugin update, it increases our APK size, hmm, that's not expected. Well ok, let's check release notes of the changes, lo and behold!
+ The only pointer I was following while building locally was to see where the increase in size happens, and it was that innocent commit with two android libraries and Gradle-Plugin update. Ok now YES! we have the commit let's check which of the updates are causing the size to spike, I thought must be the libs update to newer versions so let's check the Gradle-Plugin update first and be done with it that this not the problem, but surprise! After the only plugin update, it increases our APK size, hmm, that's not expected. Well ok, let's check release notes of the changes, [lo and behold!](https://developer.android.com/studio/releases/gradle-plugin#extractNativeLibs)
 
 > Native libraries packaged uncompressed by default
 When you build your app, the plugin now sets extractNativeLibs to "false" by default. That is, your native libraries are page aligned and packaged uncompressed. While this results in a larger upload size, your users benefit from the following:
@@ -28,11 +28,8 @@ Smaller download size because Play Store compression is typically better when yo
 If you want the Android Gradle plugin to instead package compressed native libraries, include the following in your app's manifest:
 
     <application
-    android:extractNativeLibs="true"
-    ... >
+    android:extractNativeLibs="true"... >
     </application>
-
-- [https://developer.android.com/studio/releases/gradle-plugin#extractNativeLibs](https://developer.android.com/studio/releases/gradle-plugin#extractNativeLibs)
 
 It was expected behavior to have the APK size increased, but why it isn't installable? To be precise, APK from Bitrise isn't installable but locally everything is fine. Interesting question indeed, let's find out how Bitrise is generating the APK? Why that APK works via Playstore but doesn't when we try to install it on our devices.
 
