@@ -5,12 +5,13 @@ permalink:	pretty
 title:	Waqas Ahmed
 tagline:	My opinions and inspirations
 description:	Trying to get my head around it.
-url:	http://getpoole.com
+url:	https://waqas.dev
 markdown: kramdown
 highlighter: rouge
 
 author:
   name:	Waqas Ahmed
+  email: mail@waqas.dev
   url:	https://twitter.com/waah42
 
 paginate:	3
@@ -18,8 +19,8 @@ paginate:	3
 # Custom vars
 version:	1.0.0
 
-# github:
-#   repo:           https://github.com/poole/poole
+github:
+  repo: https://github.com/waah42/waah42.github.io
 
 pages_list:       
   About:	'/about'
