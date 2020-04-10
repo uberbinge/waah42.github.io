@@ -52,16 +52,17 @@ I used these commands to sign the APK and verify the alignment afterward.
 
 1. Sign the APK with jarsigner
 
-    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $APP_KEY app-release-unsigned.apk alias -storepass pass
+    > jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $APP_KEY app-release-unsigned.apk alias -storepass pass
 2. Align the APK and page align the shared objects as well. ([source](https://developer.android.com/studio/command-line/zipalign))
 
-    zipalign -v -p 4 app-release-unsigned.apk aligned.apk 
-(-v is for alignment, from the docs "The <alignment> is an integer that defines the byte-alignment boundaries. This must always be 4 (which provides 32-bit alignment) or else it effectively does nothing." ), you can read more about zipalign [here](https://developer.android.com/studio/command-line/zipalign).
+    > zipalign -v -p 4 app-release-unsigned.apk aligned.apk 
+
+    (**-v** is for alignment, from the docs "The <alignment> is an integer that defines the byte-alignment boundaries. This must always be 4 (which provides 32-bit alignment) or else it effectively does nothing." ), you can read more about zipalign [here](https://developer.android.com/studio/command-line/zipalign).
 3. Check the alignment is correct.
 
-    zipalign -c -v -p 4 aligned.apk
-
-`**-c** to check the alignment.`
+    > zipalign -c -v -p 4 aligned.apk
+    
+    **-c** to check the alignment.
 
 But in when I ran the check after printing a bunch of (OK - compressed) after file names, in the end, it said: "Verification FAILED". My assumption was with the uncompressed native libraries zipalign is not aligning those files correctly, so it could be a bug in zipalign, but then I remember there is something like apksigner and in the docs, it mentions you should sign the APK with apksigner now and the App-Bundles with Jarsigner.
 
