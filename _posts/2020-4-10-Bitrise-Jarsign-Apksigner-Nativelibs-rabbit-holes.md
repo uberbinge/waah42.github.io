@@ -27,9 +27,11 @@ Smaller app install size because the platform can access the native libraries di
 Smaller download size because Play Store compression is typically better when you include uncompressed native libraries in your APK or Android App Bundle.
 If you want the Android Gradle plugin to instead package compressed native libraries, include the following in your app's manifest:
 
-    <application
+```xml
+<application
     android:extractNativeLibs="true"... >
-    </application>
+</application>
+```
 
 It was expected behavior to have the APK size increased, but why it isn't installable? To be precise, APK from Bitrise isn't installable but locally everything is fine. Interesting question indeed, let's find out how Bitrise is generating the APK? Why that APK works via Playstore but doesn't when we try to install it on our devices.
 
@@ -51,16 +53,19 @@ The only change mentioned in the doc is that if you use JARSign you need to Zipa
 I used these commands to sign the APK and verify the alignment afterward.
 
 1. Sign the APK with jarsigner
-
-    > jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $APP_KEY app-release-unsigned.apk alias -storepass pass
+```bash
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $APP_KEY app-release-unsigned.apk alias -storepass pass
+```
 2. Align the APK and page align the shared objects as well. ([source](https://developer.android.com/studio/command-line/zipalign))
-
-    > zipalign -v -p 4 app-release-unsigned.apk aligned.apk 
+```bash
+zipalign -v -p 4 app-release-unsigned.apk aligned.apk
+```
 
     (**-v** is for alignment, from the docs "The <alignment> is an integer that defines the byte-alignment boundaries. This must always be 4 (which provides 32-bit alignment) or else it effectively does nothing." ), you can read more about zipalign [here](https://developer.android.com/studio/command-line/zipalign).
 3. Check the alignment is correct.
-
-    > zipalign -c -v -p 4 aligned.apk
+```bash
+zipalign -c -v -p 4 aligned.apk
+```
     
     **-c** to check the alignment.
 
