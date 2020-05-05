@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes.
-permalink: Diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes.
+permalink: Diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes
 ---
 
 One fine afternoon and I hear the slack sound of a new message. Someone was unable to install one of the latest APKs from our #stable-build channel. To get more context I asked if they are trying to install the first time to understand the potential error surface. I asked the question, "Did the previous versions use to work for you?" and the reply was yes and they sent me a link to the previous working version, which was very helpful. Thanks!
