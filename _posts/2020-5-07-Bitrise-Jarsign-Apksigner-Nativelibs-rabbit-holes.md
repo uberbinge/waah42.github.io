@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes
-permalink: Diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes
+permalink: diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes
 ---
 
 ### TLDR
