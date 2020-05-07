@@ -14,7 +14,7 @@ One fine afternoon and I hear the slack sound of a new message. Someone was unab
 
 
 
-## Check the intensity of 🔥
+### Check the intensity of 🔥
 
 Naturally, I tried to reproduce the issue by installing the APK on my device, while fully hoping it works.... "**it didn't !**". It failed with the error. 
 
@@ -22,7 +22,7 @@ Naturally, I tried to reproduce the issue by installing the APK on my device, wh
 
 (mild panic, as we released the same build recently, time to head to Playstore to check if we mega screwed up). Things via Playstore were all fine, APK size was almost the same as before and it was installable.
 
-## Following the breadcrumbs
+### Following the breadcrumbs
 
 Till now I was building the APK via Bitrise to reproduce the issue. I started building APK from my laptop. Because waiting on Bitrise for half an hour for each commit wasn't that nice. 
 
@@ -40,7 +40,7 @@ It was normal behaviour to have the APK size increased, but why it isn't install
 
 Meanwhile, to let internal people install our APK via Bitrise QRcode. I created the PR to set exactly above mentioned setting for Native libraries. With that change, APK size was back to previous size, and APK from Bitrise worked. Phew, now we have some breathing room to explore, and internals can still install and test our APK like they used to.
 
-## Let the rabbit hole begin
+### Let the rabbit hole begin
 
 So I head over to the Bitrise and check how we build the APK. I noticed we build and sign twice. One for the Playstore and one for internal downloads. That might be the reason why it's working via Playstore. Ah we upload an App-Bundle to the Playstore and build a normal release-signed APK for our internal usage. Then Playstore optimizes the App-Bundle and the actual download for our users is still almost the same as before, nice!
 
@@ -52,7 +52,7 @@ Ok as next step I set the "extractNativeLibs to true" locally as suggested in th
 
 The only change mentioned in the doc is that if you use JARSign you need to Zipalign the APK _afterward_ as after the JARSign the 4-byte alignment is broken and you need Zipalign tool to align with 4-bytes again.
 
-### Steps to sign the APK and verify the alignment afterward
+#### Steps to sign the APK and verify the alignment afterwards
 
 1. Sign the APK with jarsigner
 ```bash
@@ -89,7 +89,7 @@ I used the `zipalign` _before_ signing the APK with `apksigner`. I checked the a
 
 I generated the APK with assembledRelease again, and this time I ran the zipalign -c check before aligning the APK. It said "Verification successful"! The APK generated via assembleRelease Gradle task is already aligned or it would seem so. I signed the APK with apksigner and viola! the APK with uncompressed native libraries is installable again.
 
-## Related links
+### Related links
 
 1.  [https://developer.android.com/studio/build/building-cmdline](https://developer.android.com/studio/build/building-cmdline)
 2.  [https://developer.android.com/studio/command-line/zipalign](https://developer.android.com/studio/command-line/zipalign)
