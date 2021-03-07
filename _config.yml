@@ -24,7 +24,7 @@ github:
 
 pages_list:       
   About:	'/about'
-  Archive:	'/archive'
+  Posts:	'/posts'
   Feed:	'/atom.xml'
 
 # gems
