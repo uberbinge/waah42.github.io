@@ -32,7 +32,7 @@ With following code the app drawer shows `activity` label in app drawer and appl
 ## After
 After removing `activity's` `android:label` now both app drawer and App's info page show same name.
 
-```
+```xml
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
