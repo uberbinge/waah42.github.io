@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- any header inserts go here-->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="Waqas&apos;s new blog" /><script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/sidenotes.js"></script>
+
+    
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes | Waqas’s new blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes" />
+<meta name="author" content="Waqas Ahmed" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TLDR" />
+<meta property="og:description" content="TLDR" />
+<link rel="canonical" href="http://0.0.0.0:4000/diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes" />
+<meta property="og:url" content="http://0.0.0.0:4000/diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes" />
+<meta property="og:site_name" content="Waqas’s new blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-07T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes" />
+<script type="application/ld+json">
+{"description":"TLDR","headline":"Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes","dateModified":"2020-05-07T00:00:00+00:00","datePublished":"2020-05-07T00:00:00+00:00","url":"http://0.0.0.0:4000/diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes","author":{"@type":"Person","name":"Waqas Ahmed"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+
+
+<section class="post">
+
+    <header class="post-header">
+        <h1 class="post-title">
+            
+            Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes
+            
+            
+        </h1>
+
+        <h4 class="post-author">
+            
+             Waqas Ahmed 
+            
+        </h4>
+
+    </header>
+
+    <article class="post-content">
+        <h3 id="tldr">TLDR</h3>
+
+<ul>
+  <li>The combination of update of Android Gradle Plugin to <a href="https://developer.android.com/studio/releases/gradle-plugin#3-6-0">3.6.1</a> and singing the APK with <code class="language-plaintext highlighter-rouge">Jarsigner</code> causes the APK to fail with error <code class="language-plaintext highlighter-rouge">"Failure [INSTALL_FAILED_INVALID_APK: Failed to extract native libraries, res=-2]" </code></li>
+  <li>One solution as mentioned in the release notes of the plugin update is to opt-out of the new default settings.</li>
+  <li>Second solution is to sign the APK with Gradle instead of “Android Sign Step” from Bitrise.</li>
+</ul>
+
+<p>One fine afternoon and I hear the slack sound of a new message. Someone was unable to install one of the latest APKs from our #stable-build channel. I asked if they are trying to install the first time to understand the potential error surface. I asked the question, “Did the previous versions use to work for you?” and the reply was yes and they sent me a link to the previous working version, which was very helpful. Thanks!</p>
+
+<h3 id="check-the-intensity-of-">Check the intensity of 🔥</h3>
+
+<p>Naturally, I tried to reproduce the issue by installing the APK on my device, while fully hoping it works…. “<strong>it didn’t !</strong>”. It failed with the error. </p>
+
+<blockquote>
+  <p>Failure [INSTALL_FAILED_INVALID_APK: Failed to extract native libraries, res=-2]</p>
+</blockquote>
+
+<p>(mild panic, as we released the same build recently, time to head to Playstore to check if we mega screwed up). Things via Playstore were all fine, APK size was almost the same as before and it was installable.</p>
+
+<h3 id="following-the-breadcrumbs">Following the breadcrumbs</h3>
+
+<p>Till now I was building the APK via Bitrise to reproduce the issue. I started building APK from my laptop. Because waiting on Bitrise for half an hour for each commit wasn’t that nice. </p>
+
+<p>APK built from Gradle or AS was working. We did test the QA APK before releasing it. We built the APK on a local machine instead of Bitrise. Continuing the detective work, going through many commits, I found out that <em>one</em> commit. It had some android libraries updates like constraint-layout and material-design but also Android-Gradle-Plugin version to <a href="https://developer.android.com/studio/releases/gradle-plugin#3-6-0">3.6.1</a>.</p>
+
+<p>I thought must be the libs update to newer versions so let’s check the Gradle-Plugin update first. and be sure that it is not the problem. But surprise! After the only plugin update, it increases our APK size, hmm, that’s not expected. Well ok, let’s check release notes of the changes, <a href="https://developer.android.com/studio/releases/gradle-plugin#extractNativeLibs">lo and behold!</a></p>
+
+<blockquote>
+  <p>Native libraries packaged uncompressed by default When you build your app, the plugin now sets extractNativeLibs to “false” by default. That is, your native libraries are page aligned and packaged uncompressed. While this results in a larger upload size, your users benefit from the following: Smaller app install size because the platform can access the native libraries directly from the installed APK, without creating a copy of the libraries. Smaller download size because Play Store compression is typically better when you include uncompressed native libraries in your APK or Android App Bundle. If you want the Android Gradle plugin to instead package compressed native libraries, include the following in your app’s manifest:</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;application
+    android:extractNativeLibs="true"... &gt;
+&lt;/application&gt;
+</code></pre></div></div>
+
+<p>It was normal behaviour to have the APK size increased, but why it isn’t installable? To be precise, APK from Bitrise isn’t installable but building from local machine is fine. Let’s find out how Bitrise is generating the APK? Why that APK works via Playstore but doesn’t when we try to install it on our devices?</p>
+
+<p>Meanwhile, to let internal people install our APK via Bitrise QRcode. I created the PR to set exactly above mentioned setting for Native libraries. With that change, APK size was back to previous size, and APK from Bitrise worked. Phew, now we have some breathing room to explore, and internals can still install and test our APK like they used to.</p>
+
+<h3 id="let-the-rabbit-hole-begin">Let the rabbit hole begin</h3>
+
+<p>So I head over to the Bitrise and check how we build the APK. I noticed we build and sign twice. One for the Playstore and one for internal downloads. That might be the reason why it’s working via Playstore. Ah we upload an App-Bundle to the Playstore and build a normal release-signed APK for our internal usage. Then Playstore optimizes the App-Bundle and the actual download for our users is still almost the same as before, nice!</p>
+
+<p>Digging deep into how Bitrise is building the APK I see it is nothing out of usual. Calling the same assembleRelease Gradle task. Bitrise is also signing the APK, and in my local tests, I only worked with debug signing keys and not the actual credentials used by Bitrise. I downloaded the signing keys and passwords from Bitrise and generated the APK and signed it via Android Studio. It worked fine 🙃.</p>
+
+<p>In Android Studio (AS), to sign the APK there are two options. Sign the APK with signature 1 or 2 and both 🤷‍. I tried all three variants and APK was still installable from all variants. Unable to reproduce via AS, I thought let’s check how the signing is being done on the CI. Turns out for signing, Bitrise provides an Android-Sign Step which is using the approach to run Jarsign on the APK first and then Zipalign it. I tried same steps via command line on my machine and finally, the errors showed up locally as well.</p>
+
+<p>Ok as next step I set the “extractNativeLibs to true” locally as suggested in the release notes of the android-gradle-plugin and re-ran the same steps and the APK was installable again. Now more curious than ever I head over to read through docs about how to sign the Android APK, and I saw this there is new APKSign utility also available instead of using JARSign.</p>
+
+<p>The only change mentioned in the doc is that if you use JARSign you need to Zipalign the APK <em>afterward</em> as after the JARSign the 4-byte alignment is broken and you need Zipalign tool to align with 4-bytes again.</p>
+
+<h4 id="steps-to-sign-the-apk-and-verify-the-alignment-afterwards">Steps to sign the APK and verify the alignment afterwards</h4>
+
+<ol>
+  <li>Sign the APK with jarsigner
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jarsigner <span class="nt">-verbose</span> <span class="nt">-sigalg</span> SHA1withRSA <span class="nt">-digestalg</span> SHA1 <span class="nt">-keystore</span> <span class="nv">$APP_KEY</span> app-release-unsigned.apk <span class="nb">alias</span> <span class="nt">-storepass</span> pass
+</code></pre></div>    </div>
+  </li>
+  <li>Align the APK and page align the shared objects as well. (<a href="https://developer.android.com/studio/command-line/zipalign">source</a>)
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zipalign <span class="nt">-v</span> <span class="nt">-p</span> 4 app-release-unsigned.apk aligned.apk
+</code></pre></div>    </div>
+
+    <p>(<strong>-v</strong> is for alignment, from the docs “The <alignment> is an integer that defines the byte-alignment boundaries. This must always be 4 (which provides 32-bit alignment) or else it effectively does nothing." ), you can read more about zipalign [here](https://developer.android.com/studio/command-line/zipalign).</alignment></p>
+  </li>
+  <li>Check the alignment is correct.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zipalign <span class="nt">-c</span> <span class="nt">-v</span> <span class="nt">-p</span> 4 aligned.apk
+</code></pre></div>    </div>
+
+    <p><strong>-c</strong> to check the alignment.</p>
+  </li>
+</ol>
+
+<p>But when I ran the check after printing a bunch of (OK - compressed) after file names, in the end, it said: “Verification FAILED”. My assumption was with the uncompressed native libraries zipalign is not aligning those files correctly, so it could be a bug in zipalign, but then I remember there is something like apksigner and in the docs, it mentions you should sign the APK with apksigner now and the App-Bundles with Jarsigner.</p>
+
+<p>I tried the steps mentioned in the docs. One thing which was different from previous steps is you are supposed to zipalign the APK first and then sign in with apksigner as the signature of the APK will be invalid if the file contents are changed after the signing (makes sense).</p>
+
+<p>From the docs of Zipalign:</p>
+
+<blockquote>
+  <p><strong>Caution:</strong> You must use zipalign at one of two specific points in the app-building process, depending on which app-signing tool you use:</p>
+</blockquote>
+
+<blockquote>
+  <p>If you use <a href="https://developer.android.com/studio/command-line/apksigner"><strong>apksigner</strong></a>, zipalign must only be performed <strong>before</strong> the APK file has been signed. If you sign your APK using apksigner and make further changes to the APK, its signature is invalidated.</p>
+</blockquote>
+
+<blockquote>
+  <p>If you use <a href="https://docs.oracle.com/javase/tutorial/deployment/jar/signing.html"><strong>jarsigner</strong></a>, zipalign must only be performed <strong>after</strong> the APK file has been signed.</p>
+</blockquote>
+
+<p>I used the <code class="language-plaintext highlighter-rouge">zipalign</code> <em>before</em> signing the APK with <code class="language-plaintext highlighter-rouge">apksigner</code>. I checked the alignment with the <code class="language-plaintext highlighter-rouge">-c</code> option but it still said verification failed at the end. I proceeded with the <code class="language-plaintext highlighter-rouge">apksinger</code> and signed the APK but it still failed with same error. #sadpanda.</p>
+
+<h3 id="what-worked">What worked</h3>
+
+<p>I generated the APK with assembledRelease again, and this time I ran the zipalign -c check before aligning the APK. It said “Verification successful”! The APK generated via assembleRelease Gradle task is already aligned or it would seem so. I signed the APK with apksigner and viola! the APK with uncompressed native libraries is installable again.</p>
+
+<h3 id="related-links">Related links</h3>
+
+<ol>
+  <li><a href="https://developer.android.com/studio/build/building-cmdline">https://developer.android.com/studio/build/building-cmdline</a></li>
+  <li><a href="https://developer.android.com/studio/command-line/zipalign">https://developer.android.com/studio/command-line/zipalign</a></li>
+  <li><a href="https://developer.android.com/studio/command-line/apksigner">https://developer.android.com/studio/command-line/apksigner</a></li>
+  <li><a href="https://medium.com/androiddevelopers/smallerapk-part-8-native-libraries-open-from-apk-fc22713861ff">https://medium.com/androiddevelopers/smallerapk-part-8-native-libraries-open-from-apk-fc22713861ff</a></li>
+  <li><a href="https://developer.android.com/studio/releases/gradle-plugin#3-6-0">https://developer.android.com/studio/releases/gradle-plugin#3-6-0</a></li>
+  <li><a href="https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/">https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/</a></li>
+  <li><a href="https://github.com/bitrise-steplib/steps-sign-apk">https://github.com/bitrise-steplib/steps-sign-apk</a></li>
+</ol>
+
+    </article>
+
+    <div class="post-meta">
+    
+
+    <div class="post-date">May 2020</div>
+
+    
+
+    
+
+
+    
+
+    
+</div>
+
+
+</section>
+
+<footer class="site-footer">
+    <nav class="site-nav">
+    <ul>
+        <li><a class="nav-link" href="/">posts</a></li>
+        <li><a class="nav-link" href="https://waqas.dev">homepage</a></li>
+        <li><a class="nav-link" href="/about/">about</a></li>
+        <li><a class="nav-link site-title" href="http://0.0.0.0:4000/categories">categories</a></li>
+        <li><a class="nav-link" href="http://0.0.0.0:4000/feed.xml">rss</a></li>
+    </ul>
+</nav>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+I";<p>Recently I learned that if you specify a title for your “Main” <code class="language-plaintext highlighter-rouge">activity</code>, the app drawer shows that title under App-icon instead of the “app_name” provided in <code class="language-plaintext highlighter-rouge">application</code>tag. Which may not be the desired/expected behavior for some.</p>
+
+<h2 id="before">Before</h2>
+<p>With following code the app drawer shows <code class="language-plaintext highlighter-rouge">activity</code> label in app drawer and application label in App’s info page.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nt">&lt;application</span>
+        <span class="na">android:name=</span><span class="s">".WhereIsMyMoneyApp"</span>
+        <span class="na">android:allowBackup=</span><span class="s">"true"</span>
+        <span class="na">android:icon=</span><span class="s">"@mipmap/ic_launcher"</span>
+        <span class="na">android:label=</span><span class="s">"Where is my money"</span> 
+        <span class="na">android:supportsRtl=</span><span class="s">"true"</span>
+        <span class="na">android:theme=</span><span class="s">"@style/AppTheme"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">".MainActivity"</span>
+            <span class="na">android:label=</span><span class="s">"Transactions"</span>
+            <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.intent.action.MAIN"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.LAUNCHER"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/activity&gt;</span>
+</code></pre></div></div>
+<p><a href="/images/with-activity-label.png"><img src="../assets/img/with-activity-label.png" alt="The view of app drawer when acitivity label is provided" /></a></p>
+
+<h2 id="after">After</h2>
+<p>After removing <code class="language-plaintext highlighter-rouge">activity's</code> <code class="language-plaintext highlighter-rouge">android:label</code> now both app drawer and App’s info page show same name.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">".MainActivity"</span>
+            <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.intent.action.MAIN"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.LAUNCHER"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/activity&gt;</span>
+</code></pre></div></div>
+<p><a href="/images/without-activity-label.png"><img src="../assets/img/without-activity-label.png" alt="The view of app drawer when acitivity label is provided" /></a></p>
+
+<h3 id="tip">Tip</h3>
+<p>Avoid giving your “Main” <code class="language-plaintext highlighter-rouge">activity</code> <code class="language-plaintext highlighter-rouge">android:label="@string/any_name"</code> if you don’t want that name to end up in App drawer.</p>
+:ET

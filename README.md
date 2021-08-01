@@ -1,110 +1,57 @@
-# Poole
+# Henry
 
-*The Strange Case of Dr. Jeykll and Mr. Hyde* tells the story of a lawyer investigating the connection of two persons, Dr. Henry Jekyll and Mr. Edward Hyde. Chief among the novel's supporting cast is a man by the name of Mr. Poole, Dr. Jekyll's loyal butler.
+<p align="center"><img src="assets/img/henry.png"></p>
 
------
+Henry is a [Jekyll](https://github.com/jekyll/) theme with a gorgeous reading experience, chock-full of features. To find out more about all the features check out this [blog post](https://blog.jkl.gg/henry-jekyll-theme/).
 
-Poole is the butler for [Jekyll](http://jekyllrb.com), the static site generator. It's designed and developed by [@mdo](https://twitter.com/mdo) to provide a clear and concise foundational setup for any Jekyll site. It does so by furnishing a full vanilla Jekyll install with example templates, pages, posts, and styles.
+# Getting Started
 
-![Poole](https://f.cloud.github.com/assets/98681/1834359/71ae4048-73db-11e3-9a3c-df38eb170537.png)
+The easiest way to get up and running with a Jekyll blog using Henry is using the included [Docker](https://www.docker.com/) configuration file.
 
-See Poole in action with [the demo site](http://demo.getpoole.com).
-
-There are currently two official themes built on Poole:
-
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
-
-Individual theme feedback and bug reports should be submitted to the theme's individual repository.
-
-
-## Contents
-
-- [Usage](#usage)
-- [Options](#options)
-  - [Rems, `font-size`, and scaling](#rems-font-size-and-scaling)
-- [Development](#development)
-- [Author](#author)
-- [License](#license)
-
-
-## Usage
-
-### 1. Install Jekyll
-
-Poole is built for use with Jekyll, so naturally you'll need to install that. On Macs, it's rather straightforward:
-
-```bash
-$ gem install jekyll
+```shell
+# 1. clone Henry
+git clone git@github.com:kaushikgopal/henry-jekyll.git my_blog
+# 2. cleanup script so unnecessary files are remoed
+./start_new_blog.sh
+# 3. spin up blog with docker
+docker-compose up
 ```
 
-**Windows users:** Windows users have a bit more work to do, but luckily [@juthilo](https://github.com/juthilo) has your back with his [Run Jekyll on Windows](https://github.com/juthilo/run-jekyll-on-windows) guide.
+You're good to go!
 
-You may also need to install Pygments, the Python syntax highlighter for code snippets that plays nicely with Jekyll. Read more about this [in the Jekyll docs](http://jekyllrb.com/docs/templates/#code_snippet_highlighting).
-
-### 2a. Quick start
-
-To help anyone with any level of familiarity with Jekyll quickly get started, Poole includes everything you need for a basic Jekyll site. To that end, just download Poole and start up Jekyll.
-
-### 2b. Roll your own Jekyll site
-
-Folks wishing to use Jekyll's templates and styles can do so with a little bit of manual labor. Download Poole and then copy what you need (likely `_layouts/`, `*.html` files, `atom.xml` for RSS, and `public/` for CSS, JS, etc.).
-
-### 3. Running locally
-
-To see your Jekyll site with Poole applied, start a Jekyll server. In Terminal, from `/Poole` (or whatever your Jekyll site's root directory is named):
-
-```bash
-$ jekyll serve
+```shell
+## on a Mac
+http://0.0.0.0:4000/
+## on Windows
+http://localhost:4000/
 ```
 
-Open <http://localhost:4000> in your browser, and voilà. You're done.
+You can setup new/existing blogs with Henry, with or without Docker. Feel free to refer to this [setup guide](./setup.md) for details.
 
+# Publishing guide
 
-## Options
+## Github Pages
 
-Poole includes some customizable options, typically applied via classes on the `<body>` element.
+If you wish to publish your blog using [Github Pages](https://pages.github.com) (a popular free hosting option) you can follow this [publishing guide](./publishing_github_pages.md).
 
+## Firebase Hosting (included with Docker container)
 
-### Rems, `font-size`, and scaling
+Another good option to publish your blog is [Firebase hosting](https://firebase.google.com/docs/hosting). It includes a pretty generous free plan and allows plenty of customizability. Here's a [setup guide](./publishing_firebase_hosting.md).
 
-Poole is built almost entirely with `rem`s (instead of pixels). `rem`s are like `em`s, but instead of building on the immediate parent's `font-size`, they build on the root element, `<html>`.
+# Contributing
 
-By default, we use the following:
+Bug reports and pull requests are welcome on [GitHub](https://github.com/kaushikgopal/henry-jekyll). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-```css
-html {
-  font-size: 16px;
-  line-height: 1.5;
-}
-@media (min-width: 38em) {
-  html {
-    font-size: 20px;
-  }
-}
+To get started check out the [DEVELOPMENT](https://github.com/kaushikgopal/henry-jekyll/blob/main/DEVELOPMENT.md) page.
 
-```
+# Henry in the Wild
 
-To easily scale your site's typography and components, simply customize the base `font-size`s here.
+Here are a couple of blogs that use Henry:
 
+1. [Karthick Gopal's blog](https://blog.karthickg.com)
+2. [Kaushik Gopal's blog](https://blog.jkl.gg)
+3. [Nic Finn's blog](https://neodymiumphi.sh) _(Github Pages)_
 
-## Development
+# License
 
-Poole has two branches, but only one is used for active development.
-
-- `master` for development.  **All pull requests should be to submitted against `master`.**
-- `gh-pages` for our hosted site, which includes our analytics tracking code. **Please avoid using this branch.**
-
-
-## Author
-
-**Mark Otto**
-- <https://github.com/mdo>
-- <https://twitter.com/mdo>
-
-
-## License
-
-Open sourced under the [MIT license](LICENSE.md).
-
-<3
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

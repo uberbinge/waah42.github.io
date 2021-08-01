@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-08-01T17:47:29+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Waqas’s new blog</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>Waqas Ahmed</name></author><entry><title type="html">Andorid app name not showing up</title><link href="http://0.0.0.0:4000/android-app-name-not-showing-up" rel="alternate" type="text/html" title="Andorid app name not showing up" /><published>2021-03-07T00:00:00+00:00</published><updated>2021-03-07T00:00:00+00:00</updated><id>http://0.0.0.0:4000/android-app-name</id><content type="html" xml:base="http://0.0.0.0:4000/android-app-name-not-showing-up">&lt;p&gt;Recently I learned that if you specify a title for your “Main” &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;activity&lt;/code&gt;, the app drawer shows that title under App-icon instead of the “app_name” provided in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;application&lt;/code&gt;tag. Which may not be the desired/expected behavior for some.&lt;/p&gt;
+
+&lt;h2 id=&quot;before&quot;&gt;Before&lt;/h2&gt;
+&lt;p&gt;With following code the app drawer shows &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;activity&lt;/code&gt; label in app drawer and application label in App’s info page.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;application&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.WhereIsMyMoneyApp&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:allowBackup=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:icon=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@mipmap/ic_launcher&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:label=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Where is my money&quot;&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;android:supportsRtl=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:theme=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@style/AppTheme&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;activity&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.MainActivity&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:label=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Transactions&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:screenOrientation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;portrait&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;intent-filter&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;action&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.intent.action.MAIN&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;category&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.intent.category.LAUNCHER&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/intent-filter&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/activity&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;/images/with-activity-label.png&quot;&gt;&lt;img src=&quot;../assets/img/with-activity-label.png&quot; alt=&quot;The view of app drawer when acitivity label is provided&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;after&quot;&gt;After&lt;/h2&gt;
+&lt;p&gt;After removing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;activity&apos;s&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;android:label&lt;/code&gt; now both app drawer and App’s info page show same name.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        &lt;span class=&quot;nt&quot;&gt;&amp;lt;activity&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.MainActivity&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:screenOrientation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;portrait&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;intent-filter&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;action&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.intent.action.MAIN&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;category&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.intent.category.LAUNCHER&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/intent-filter&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/activity&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;/images/without-activity-label.png&quot;&gt;&lt;img src=&quot;../assets/img/without-activity-label.png&quot; alt=&quot;The view of app drawer when acitivity label is provided&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tip&quot;&gt;Tip&lt;/h3&gt;
+&lt;p&gt;Avoid giving your “Main” &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;activity&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;android:label=&quot;@string/any_name&quot;&lt;/code&gt; if you don’t want that name to end up in App drawer.&lt;/p&gt;</content><author><name>Waqas Ahmed</name></author><summary type="html">Recently I learned that if you specify a title for your “Main” activity, the app drawer shows that title under App-icon instead of the “app_name” provided in applicationtag. Which may not be the desired/expected behavior for some.</summary></entry><entry><title type="html">Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes</title><link href="http://0.0.0.0:4000/diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes" rel="alternate" type="text/html" title="Diving a bit deep into Bitrise, jarsign, zipalign, apksigner and down the rabbit holes" /><published>2020-05-07T00:00:00+00:00</published><updated>2020-05-07T00:00:00+00:00</updated><id>http://0.0.0.0:4000/Bitrise-Jarsign-Apksigner-Nativelibs-rabbit-holes</id><content type="html" xml:base="http://0.0.0.0:4000/diving-a-bit-deep-into-Bitrise,-jarsign,-zipalign,-apksigner-and-down-the-rabbit-holes">### TLDR
+
+*   The combination of update of Android Gradle Plugin to [3.6.1](https://developer.android.com/studio/releases/gradle-plugin#3-6-0) and singing the APK with `Jarsigner` causes the APK to fail with error ```&quot;Failure [INSTALL_FAILED_INVALID_APK: Failed to extract native libraries, res=-2]&quot; ```
+*   One solution as mentioned in the release notes of the plugin update is to opt-out of the new default settings.
+*   Second solution is to sign the APK with Gradle instead of &quot;Android Sign Step&quot; from Bitrise.
+
+One fine afternoon and I hear the slack sound of a new message. Someone was unable to install one of the latest APKs from our #stable-build channel. I asked if they are trying to install the first time to understand the potential error surface. I asked the question, &quot;Did the previous versions use to work for you?&quot; and the reply was yes and they sent me a link to the previous working version, which was very helpful. Thanks!
+
+
+
+### Check the intensity of 🔥
+
+Naturally, I tried to reproduce the issue by installing the APK on my device, while fully hoping it works.... &quot;**it didn&apos;t !**&quot;. It failed with the error. 
+
+&gt; Failure [INSTALL_FAILED_INVALID_APK: Failed to extract native libraries, res=-2]
+
+(mild panic, as we released the same build recently, time to head to Playstore to check if we mega screwed up). Things via Playstore were all fine, APK size was almost the same as before and it was installable.
+
+### Following the breadcrumbs
+
+Till now I was building the APK via Bitrise to reproduce the issue. I started building APK from my laptop. Because waiting on Bitrise for half an hour for each commit wasn&apos;t that nice. 
+
+APK built from Gradle or AS was working. We did test the QA APK before releasing it. We built the APK on a local machine instead of Bitrise. Continuing the detective work, going through many commits, I found out that _one_ commit. It had some android libraries updates like constraint-layout and material-design but also Android-Gradle-Plugin version to [3.6.1](https://developer.android.com/studio/releases/gradle-plugin#3-6-0).
+
+I thought must be the libs update to newer versions so let&apos;s check the Gradle-Plugin update first. and be sure that it is not the problem. But surprise! After the only plugin update, it increases our APK size, hmm, that&apos;s not expected. Well ok, let&apos;s check release notes of the changes, [lo and behold!](https://developer.android.com/studio/releases/gradle-plugin#extractNativeLibs)
+
+&gt; Native libraries packaged uncompressed by default When you build your app, the plugin now sets extractNativeLibs to &quot;false&quot; by default. That is, your native libraries are page aligned and packaged uncompressed. While this results in a larger upload size, your users benefit from the following: Smaller app install size because the platform can access the native libraries directly from the installed APK, without creating a copy of the libraries. Smaller download size because Play Store compression is typically better when you include uncompressed native libraries in your APK or Android App Bundle. If you want the Android Gradle plugin to instead package compressed native libraries, include the following in your app&apos;s manifest:
+
+    &lt;application
+        android:extractNativeLibs=&quot;true&quot;... &gt;
+    &lt;/application&gt;
+
+It was normal behaviour to have the APK size increased, but why it isn&apos;t installable? To be precise, APK from Bitrise isn&apos;t installable but building from local machine is fine. Let&apos;s find out how Bitrise is generating the APK? Why that APK works via Playstore but doesn&apos;t when we try to install it on our devices?
+
+Meanwhile, to let internal people install our APK via Bitrise QRcode. I created the PR to set exactly above mentioned setting for Native libraries. With that change, APK size was back to previous size, and APK from Bitrise worked. Phew, now we have some breathing room to explore, and internals can still install and test our APK like they used to.
+
+### Let the rabbit hole begin
+
+So I head over to the Bitrise and check how we build the APK. I noticed we build and sign twice. One for the Playstore and one for internal downloads. That might be the reason why it&apos;s working via Playstore. Ah we upload an App-Bundle to the Playstore and build a normal release-signed APK for our internal usage. Then Playstore optimizes the App-Bundle and the actual download for our users is still almost the same as before, nice!
+
+Digging deep into how Bitrise is building the APK I see it is nothing out of usual. Calling the same assembleRelease Gradle task. Bitrise is also signing the APK, and in my local tests, I only worked with debug signing keys and not the actual credentials used by Bitrise. I downloaded the signing keys and passwords from Bitrise and generated the APK and signed it via Android Studio. It worked fine 🙃.
+
+In Android Studio (AS), to sign the APK there are two options. Sign the APK with signature 1 or 2 and both 🤷‍. I tried all three variants and APK was still installable from all variants. Unable to reproduce via AS, I thought let&apos;s check how the signing is being done on the CI. Turns out for signing, Bitrise provides an Android-Sign Step which is using the approach to run Jarsign on the APK first and then Zipalign it. I tried same steps via command line on my machine and finally, the errors showed up locally as well.
+
+Ok as next step I set the &quot;extractNativeLibs to true&quot; locally as suggested in the release notes of the android-gradle-plugin and re-ran the same steps and the APK was installable again. Now more curious than ever I head over to read through docs about how to sign the Android APK, and I saw this there is new APKSign utility also available instead of using JARSign.
+
+The only change mentioned in the doc is that if you use JARSign you need to Zipalign the APK _afterward_ as after the JARSign the 4-byte alignment is broken and you need Zipalign tool to align with 4-bytes again.
+
+#### Steps to sign the APK and verify the alignment afterwards
+
+1. Sign the APK with jarsigner
+```bash
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $APP_KEY app-release-unsigned.apk alias -storepass pass
+```
+2. Align the APK and page align the shared objects as well. ([source](https://developer.android.com/studio/command-line/zipalign))
+```bash
+zipalign -v -p 4 app-release-unsigned.apk aligned.apk
+```
+
+    (**-v** is for alignment, from the docs &quot;The &lt;alignment&gt; is an integer that defines the byte-alignment boundaries. This must always be 4 (which provides 32-bit alignment) or else it effectively does nothing.&quot; ), you can read more about zipalign [here](https://developer.android.com/studio/command-line/zipalign).
+3. Check the alignment is correct.
+```bash
+zipalign -c -v -p 4 aligned.apk
+```
+    
+    **-c** to check the alignment.
+
+But when I ran the check after printing a bunch of (OK - compressed) after file names, in the end, it said: &quot;Verification FAILED&quot;. My assumption was with the uncompressed native libraries zipalign is not aligning those files correctly, so it could be a bug in zipalign, but then I remember there is something like apksigner and in the docs, it mentions you should sign the APK with apksigner now and the App-Bundles with Jarsigner.
+
+I tried the steps mentioned in the docs. One thing which was different from previous steps is you are supposed to zipalign the APK first and then sign in with apksigner as the signature of the APK will be invalid if the file contents are changed after the signing (makes sense).
+
+From the docs of Zipalign:
+
+&gt; **Caution:** You must use zipalign at one of two specific points in the app-building process, depending on which app-signing tool you use:
+
+&gt; If you use [**apksigner**](https://developer.android.com/studio/command-line/apksigner), zipalign must only be performed **before** the APK file has been signed. If you sign your APK using apksigner and make further changes to the APK, its signature is invalidated.
+
+&gt; If you use [**jarsigner**](https://docs.oracle.com/javase/tutorial/deployment/jar/signing.html), zipalign must only be performed **after** the APK file has been signed.
+
+I used the `zipalign` _before_ signing the APK with `apksigner`. I checked the alignment with the `-c` option but it still said verification failed at the end. I proceeded with the `apksinger` and signed the APK but it still failed with same error. #sadpanda.
+
+### What worked
+
+I generated the APK with assembledRelease again, and this time I ran the zipalign -c check before aligning the APK. It said &quot;Verification successful&quot;! The APK generated via assembleRelease Gradle task is already aligned or it would seem so. I signed the APK with apksigner and viola! the APK with uncompressed native libraries is installable again.
+
+### Related links
+
+1.  [https://developer.android.com/studio/build/building-cmdline](https://developer.android.com/studio/build/building-cmdline)
+2.  [https://developer.android.com/studio/command-line/zipalign](https://developer.android.com/studio/command-line/zipalign)
+3.  [https://developer.android.com/studio/command-line/apksigner](https://developer.android.com/studio/command-line/apksigner)
+4.  [https://medium.com/androiddevelopers/smallerapk-part-8-native-libraries-open-from-apk-fc22713861ff](https://medium.com/androiddevelopers/smallerapk-part-8-native-libraries-open-from-apk-fc22713861ff)
+5.  [https://developer.android.com/studio/releases/gradle-plugin#3-6-0](https://developer.android.com/studio/releases/gradle-plugin#3-6-0)
+6.  [https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/](https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/)
+7.  [https://github.com/bitrise-steplib/steps-sign-apk](https://github.com/bitrise-steplib/steps-sign-apk)</content><author><name>Waqas Ahmed</name></author><summary type="html">TLDR</summary></entry><entry><title type="html">When to prefer pair programming over peer reviews?</title><link href="http://0.0.0.0:4000/pair-programming-vs-peer-reviews" rel="alternate" type="text/html" title="When to prefer pair programming over peer reviews?" /><published>2018-06-19T00:00:00+00:00</published><updated>2018-06-19T00:00:00+00:00</updated><id>http://0.0.0.0:4000/When-to-prefer-pair-programming-over-peer-reviews</id><content type="html" xml:base="http://0.0.0.0:4000/pair-programming-vs-peer-reviews">When to prefer pair programming over peer reviews?
+
+First let&apos;s get some help from Wikipedia in defining what pair programming and peer review process is, according to Wikipedia:
+
+[Pairing Programming](https://en.wikipedia.org/wiki/Pair_programming) is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer or navigator, reviews each line of code as it is typed in. The two programmers switch roles frequently.
+
+[Code review/Peer review](https://en.wikipedia.org/wiki/Code_review) Code review is a systematic examination (sometimes referred to as peer review) of computer source code. It is intended to find mistakes overlooked in software development, improving the overall quality of software.
+
+Now that definitions are out of the way lets talk about discussion types, there are some developers who really think only coding is **work** and discussions are **waste of time**, but for sanity’s sake lets not focus on them. There are some who value quality discussions but are skeptical of (rightly so) discussions for the sake of discussion. Or fighting over popular Tabs vs Spaces, Emacs vs Vim kind of discussion apart from those ones, I think the right amount of communication is really critical between developers of the same team and across teams.
+
+I think **, when** to discuss something, is as important as **what**. For example, there are moments during implementation when five minutes of discussion with a potential reviewer can be the difference between shit hitting the fan and a pleasant smooth feature done.
+
+But finding the right balance between the number of discussions and implementation time is hard. Every developer to some extent likes tasks which they can do alone without involving other people. I think partly because open space office stuff already has lots of distractions and people finding un-interrupted time in office is becoming increasingly difficult nowadays. Also the idea of having to go to a specific meeting room to discuss. Which could feel like overkill for smaller tasks and dreadful for bigger tasks which can take hours some times.
+&gt; This is where pair programming really helps a lot as you can discuss potential implementations or even thought process with another developer when trying to find the right clean solution to the problem at hand. No need to schedule separate meetings or explain design decisions at the end like in peer reviews. The reviewer also knows ‘w*hy’* of decisions and helps make the right trade-offs.
+
+## What went wrong in the peer review process?
+
+![Photo by [NeONBRAND](https://unsplash.com/@neonbrand?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)](https://cdn-images-1.medium.com/max/9792/0*VMejG81Xswz5Lfiv.)*Photo by [NeONBRAND](https://unsplash.com/@neonbrand?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+
+Our team is structured in a way that every dev is kinda full-stack and supposedly can work on Android, iOS, Backend, and OPS stuff. In practice, most people can work on backend and ops task but there are dedicated people for Android and iOS.
+&gt; # When for a longer period of times there were only peer reviews and almost no pairing people kept starting new tickets and then somebody had to be review scapegoat ( stuck in reviews and OPS tasks for weeks meanwhile others are just enjoying the holy trinity of “doing” stuff).
+
+## Solution:
+
+![Photo by [rawpixel](https://unsplash.com/@rawpixel) on [Unsplash](https://unsplash.com)](https://cdn-images-1.medium.com/max/5000/0*NywgvGiBenI8dws2.)*Photo by [rawpixel](https://unsplash.com/@rawpixel) on [Unsplash](https://unsplash.com)*
+
+If you find your team in a similar situation then try to increase pairing over peer reviews. We had a decision that for each story two devs will take lead and responsibility and they can mutually decide what tasks could be done better via pairing and what is better to let someone work alone and then the other lead of the story can review it. Till now it’s working a lot better in our cross-platform team.
+
+For me personally, most times pairing is far better than waiting for review and starting other tickets and having to come back to it later when I’m in the middle of some other ticket. It’s challenging to find out specific scenarios where pairing works better than peer-reviews because those scenarios are different for each team. That’s why
+&gt; # Your development workflow decision shouldn’t be too strict for pairing or peer-reviews but let the people decide what works best for them.
+
+There is this great [thread](https://twitter.com/sarahmei/status/990968833547497472) by [Sarah Mei](https://twitter.com/sarahmei) which will help you to keep in mind the power dynamics when pairing so that it’s a pleasant experience for both parties. Teams should pay attention to what could be improved because in Agile process taking advantage of the retro process is really important to improve workflow and team dynamics.
+
+What tweaks you had to make in review process which resulted in better dev workflows and team communication?</content><author><name>Waqas Ahmed</name></author><summary type="html">When to prefer pair programming over peer reviews?</summary></entry><entry><title type="html">Apple Watch</title><link href="http://0.0.0.0:4000/my-thoughts-on-apple-watch" rel="alternate" type="text/html" title="Apple Watch" /><published>2014-09-11T00:00:00+00:00</published><updated>2014-09-11T00:00:00+00:00</updated><id>http://0.0.0.0:4000/Apple-Watch</id><content type="html" xml:base="http://0.0.0.0:4000/my-thoughts-on-apple-watch">I guess it takes nothing less than Steve Jobs to not to fall in the trap of public demand, the new Apple watch got all the Appliness but it lacks the Steve&apos;ness for a whole new category of products.
+
+It works and looks a lot like its competitors and this time they were late in the party too. Being late wouldn&apos;t had matter enough if they would have got it exceptionally right or &apos;different&apos; this time too (because historically they always does). 
+
+P.S: yes ApplePay is awesome and well implemented.</content><author><name>Waqas Ahmed</name></author><summary type="html">I guess it takes nothing less than Steve Jobs to not to fall in the trap of public demand, the new Apple watch got all the Appliness but it lacks the Steve’ness for a whole new category of products.</summary></entry><entry><title type="html">5 Transformational Learnings.</title><link href="http://0.0.0.0:4000/5-Transformational-Learnings" rel="alternate" type="text/html" title="5 Transformational Learnings." /><published>2014-05-07T00:00:00+00:00</published><updated>2014-05-07T00:00:00+00:00</updated><id>http://0.0.0.0:4000/5-transformational-lessons</id><content type="html" xml:base="http://0.0.0.0:4000/5-Transformational-Learnings">## Lessons learned while taking a break from day to day routine and getting out of comfort zone.
+
+
+Last weekend we had an official trip to &lt;a href=&quot;https://www.google.com.pk/search?q=khan+pur+lake&amp;rlz=1C5CHFA_enPK561PK561&amp;es_sm=91&amp;tbm=isch&amp;tbo=u&amp;source=univ&amp;sa=X&amp;ei=obVpU529C4iWPbLggOgH&amp;ved=0CEAQsAQ&amp;biw=1278&amp;bih=649#q=khanpur+lake&amp;spell=1&amp;tbm=isch&quot; target=&quot;_blank&quot;&gt;Khanpur Lake&lt;/a&gt;, and on this trip there were some activities organized by &lt;a href=&quot;http://www.emac.pk&quot; target=&quot;_blacnk&quot;&gt;EMAC &lt;/a&gt; (a tour organizing company). Those activities were meant to be life-changing experience and yes those were truly amazing and were a life-changing experience. It was almost 2 days trip that included caving, shooting, raft building, cliff jumping, repelling, jet skiing and other team activities.
+
+There are two types of people in my company now, those who were present on trip and those who weren’t. The trust and relationship strength between those who were present on trip will never ever be the same with other ones. And other ones are totally gonna miss the bond which we will have for forever now.
+
+This was one awe-inspiring, full of fun trip. Lots of great thoughtful experiences were nicely put together. All the learning was synchronized and every single person joyously learned all the lessons.
+
+### These are the top 5 learnings of mine through this adventurous and transformational trip
+
+
+###### Embrace Fear.
+Be vulnerable; showing your fears won’t make you less of a man. Others can relate to it because they have or had the same fears and will help you to overcome it. Once you take the leap of faith and face your fears, you will feel wonderful and others will feel happy because they knew your fears and you had the courage to overcome it. 
+
+###### Be Open. 
+Be open to change, learn new skills and experiences. All these will take you one step further as an individual and you will feel amazing once you get out of your comfort zone. As Steve Jobs puts it very delicately,  
+```
+Stay Hungry, Stay Foolish.
+```
+
+###### People Are Awesome.
+Everyone is unique with his or her own unique strengths and weaknesses. In normal routine, we judge other people too quickly by their weaknesses. That’s what we must not do. Because once we have judged, we will never be able to see the phenomenal part of his or her personality. And believe me, Everyone has one. We should highlight their strengths and help them to cover up their weaknesses in a way that they will progress and achieve their vision.
+
+###### You’re more powerful than you think.
+We all have our fears like that of failure, of being judged, of someone taking our advantage etc. But you have the ability to embrace your fears and overcome those. You are powerful enough to blow away all your fears and do what you are destined to do and create what you want to and achieve what you envision to. Once you learn that you’re more powerful than you think then there is no limit to what you can do. Nobody can stop you to achieve greatness. Just remember,    
+```
+You’re more powerful than you think.
+```
+
+###### Trust People. 
+When someone trusts you, they are giving you a great honor. You will do everything to not to break their trust and help them in ways whatever you can. Other people do exactly the same. Breakout from your fear zone and trust others. But trust completely; give your 100%. You cannot build a team without trust. And without a team you cannot achieve greatness. It always takes a team to accomplish great goals. With teams, you can attain that is not possible individually. You can fight battles you cannot imagine fighting all by yourself.  
+```
+Build a team based on trust and conquer the world.
+```</content><author><name>Waqas Ahmed</name></author><summary type="html">Lessons learned while taking a break from day to day routine and getting out of comfort zone.</summary></entry></feed>

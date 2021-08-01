@@ -1,0 +1,2 @@
+I"j<p>Recently I learned that if you specify a title for your “Main” <code class="language-plaintext highlighter-rouge">activity</code>, the app drawer shows that title under App-icon instead of the “app_name” provided in <code class="language-plaintext highlighter-rouge">application</code>tag. Which may not be the desired/expected behavior for some.</p>
+:ET

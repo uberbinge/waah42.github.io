@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- any header inserts go here-->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="Waqas&apos;s new blog" /><script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/sidenotes.js"></script>
+
+    
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Andorid app name not showing up | Waqas’s new blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Andorid app name not showing up" />
+<meta name="author" content="Waqas Ahmed" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Recently I learned that if you specify a title for your “Main” activity, the app drawer shows that title under App-icon instead of the “app_name” provided in applicationtag. Which may not be the desired/expected behavior for some." />
+<meta property="og:description" content="Recently I learned that if you specify a title for your “Main” activity, the app drawer shows that title under App-icon instead of the “app_name” provided in applicationtag. Which may not be the desired/expected behavior for some." />
+<link rel="canonical" href="http://0.0.0.0:4000/android-app-name-not-showing-up" />
+<meta property="og:url" content="http://0.0.0.0:4000/android-app-name-not-showing-up" />
+<meta property="og:site_name" content="Waqas’s new blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-07T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Andorid app name not showing up" />
+<script type="application/ld+json">
+{"description":"Recently I learned that if you specify a title for your “Main” activity, the app drawer shows that title under App-icon instead of the “app_name” provided in applicationtag. Which may not be the desired/expected behavior for some.","headline":"Andorid app name not showing up","dateModified":"2021-03-07T00:00:00+00:00","datePublished":"2021-03-07T00:00:00+00:00","url":"http://0.0.0.0:4000/android-app-name-not-showing-up","author":{"@type":"Person","name":"Waqas Ahmed"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/android-app-name-not-showing-up"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+
+
+<section class="post">
+
+    <header class="post-header">
+        <h1 class="post-title">
+            
+            Andorid app name not showing up
+            
+            
+        </h1>
+
+        <h4 class="post-author">
+            
+             Waqas Ahmed 
+            
+        </h4>
+
+    </header>
+
+    <article class="post-content">
+        <p>Recently I learned that if you specify a title for your “Main” <code class="language-plaintext highlighter-rouge">activity</code>, the app drawer shows that title under App-icon instead of the “app_name” provided in <code class="language-plaintext highlighter-rouge">application</code>tag. Which may not be the desired/expected behavior for some.</p>
+
+<h2 id="before">Before</h2>
+<p>With following code the app drawer shows <code class="language-plaintext highlighter-rouge">activity</code> label in app drawer and application label in App’s info page.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nt">&lt;application</span>
+        <span class="na">android:name=</span><span class="s">".WhereIsMyMoneyApp"</span>
+        <span class="na">android:allowBackup=</span><span class="s">"true"</span>
+        <span class="na">android:icon=</span><span class="s">"@mipmap/ic_launcher"</span>
+        <span class="na">android:label=</span><span class="s">"Where is my money"</span> 
+        <span class="na">android:supportsRtl=</span><span class="s">"true"</span>
+        <span class="na">android:theme=</span><span class="s">"@style/AppTheme"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">".MainActivity"</span>
+            <span class="na">android:label=</span><span class="s">"Transactions"</span>
+            <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.intent.action.MAIN"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.LAUNCHER"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/activity&gt;</span>
+</code></pre></div></div>
+<p><a href="/images/with-activity-label.png"><img src="../assets/img/with-activity-label.png" alt="The view of app drawer when acitivity label is provided" /></a></p>
+
+<h2 id="after">After</h2>
+<p>After removing <code class="language-plaintext highlighter-rouge">activity's</code> <code class="language-plaintext highlighter-rouge">android:label</code> now both app drawer and App’s info page show same name.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">".MainActivity"</span>
+            <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.intent.action.MAIN"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.LAUNCHER"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/activity&gt;</span>
+</code></pre></div></div>
+<p><a href="/images/without-activity-label.png"><img src="../assets/img/without-activity-label.png" alt="The view of app drawer when acitivity label is provided" /></a></p>
+
+<h3 id="tip">Tip</h3>
+<p>Avoid giving your “Main” <code class="language-plaintext highlighter-rouge">activity</code> <code class="language-plaintext highlighter-rouge">android:label="@string/any_name"</code> if you don’t want that name to end up in App drawer.</p>
+
+    </article>
+
+    <div class="post-meta">
+    
+
+    <div class="post-date">Mar 2021</div>
+
+    
+
+    
+
+
+    
+
+    
+</div>
+
+
+</section>
+
+<footer class="site-footer">
+    <nav class="site-nav">
+    <ul>
+        <li><a class="nav-link" href="/">posts</a></li>
+        <li><a class="nav-link" href="https://waqas.dev">homepage</a></li>
+        <li><a class="nav-link" href="/about/">about</a></li>
+        <li><a class="nav-link site-title" href="http://0.0.0.0:4000/categories">categories</a></li>
+        <li><a class="nav-link" href="http://0.0.0.0:4000/feed.xml">rss</a></li>
+    </ul>
+</nav>
+</footer>
+
+</body>
+
+</html>
