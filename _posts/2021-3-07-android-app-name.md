@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Andorid app name not showing up
+title: Android app name not showing up
 permalink: android-app-name-not-showing-up
 ---
 
