@@ -27,7 +27,7 @@ With following code the app drawer shows `activity` label in app drawer and appl
             </intent-filter>
         </activity>
 ```
-<a href="/images/with-activity-label.png"><img src="/images/with-activity-label.png" alt="The view of app drawer when acitivity label is provided"></a>
+<a href="/images/with-activity-label.png"><img src="../assets/img/with-activity-label.png" alt="The view of app drawer when acitivity label is provided"></a>
 
 ## After
 After removing `activity's` `android:label` now both app drawer and App's info page show same name.
@@ -42,7 +42,7 @@ After removing `activity's` `android:label` now both app drawer and App's info p
             </intent-filter>
         </activity>
 ```
-<a href="/images/without-activity-label.png"><img src="/images/without-activity-label.png" alt="The view of app drawer when acitivity label is provided"></a>
+<a href="/images/without-activity-label.png"><img src="../assets/img/without-activity-label.png" alt="The view of app drawer when acitivity label is provided"></a>
 
 ### Tip
 Avoid giving your “Main” `activity` `android:label="@string/any_name"` if you don’t want that name to end up in App drawer. 
