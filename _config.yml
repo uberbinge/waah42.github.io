@@ -37,7 +37,7 @@ permalink: /:title/
 external-url-indicator: " »"
 
 # Build settings
-theme: henry-jekyll
+remote_theme: henry-jekyll
 markdown: kramdown
 highlighter: rouge
 encoding: utf-8
